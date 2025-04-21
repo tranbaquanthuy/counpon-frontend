@@ -1,0 +1,12 @@
+.selected-box {
+    transform: rotateY(360deg);
+    background-color: #86efac; /* Green background for revealed box */
+}
+
+.hover\:scale-105:hover {
+    transform: scale(1.05);
+}
+
+.transition-transform {
+    transition: transform 0.5s ease-in-out;
+}
