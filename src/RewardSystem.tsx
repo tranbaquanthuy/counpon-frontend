@@ -16,17 +16,21 @@ interface Reward {
 export default function RewardSystem() {
   const [user, setUser] = useState<User | null>(null);
   const [rewards, setRewards] = useState<Reward[]>([]);
+  
+  const api = axios.create({
+  baseURL: 'https://coupon-h929.onrender.com',
+});
 
-  useEffect(() => {
-    axios.get('/api/user').then(res => setUser(res.data));
-    axios.get('/api/rewards').then(res => setRewards(res.data));
-  }, []);
+    useEffect(() => {
+      api.get('/api/user').then(res => setUser(res.data));
+      api.get('/api/rewards').then(res => setRewards(res.data));
+    }, []);
 
-  const redeemReward = async (rewardId: number) => {
-    await axios.post('/api/redeem', { rewardId });
-    const updatedUser = await axios.get('/api/user');
-    setUser(updatedUser.data);
-  };
+    const redeemReward = async (rewardId: number) => {
+      await api.post('/api/redeem', { rewardId });
+      const updatedUser = await api.get('/api/user');
+      setUser(updatedUser.data);
+};
 
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial' }}>
